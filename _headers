@@ -1,0 +1,25 @@
+# Cloudflare Pages response headers. https://developers.cloudflare.com/pages/configuration/headers/
+
+# Keep the free *.pages.dev preview addresses out of Google. Your own domain stays indexable.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+# Fonts and animation libraries never change: cache for a year.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/js/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Photos and logos: cache for a week. Give a replacement image a new file name to show it immediately.
+/assets/img/*
+  Cache-Control: public, max-age=604800
